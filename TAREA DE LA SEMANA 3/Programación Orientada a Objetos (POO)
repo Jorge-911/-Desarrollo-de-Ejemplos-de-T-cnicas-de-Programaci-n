@@ -1,0 +1,48 @@
+# Clase que representa el clima de un solo día
+class DiaClima:
+    def __init__(self, dia, temperatura):
+        self.dia = dia  # Número del día (1 al 7)
+        self.temperatura = temperatura  # Temperatura registrada
+
+    def __str__(self):
+        # Representación en texto de un objeto DiaClima
+        return f"Día {self.dia}: {self.temperatura}°C"
+
+
+# Clase que representa una semana de datos climáticos
+class SemanaClimatica:
+    def __init__(self):
+        self.dias = []  # Lista para almacenar objetos DiaClima
+
+    def agregar_dia(self, dia, temperatura):
+        # Crea un objeto DiaClima y lo agrega a la lista
+        dia_clima = DiaClima(dia, temperatura)
+        self.dias.append(dia_clima)
+
+    def calcular_promedio(self):
+        # Suma todas las temperaturas y divide entre la cantidad de días
+        total = sum(d.temperatura for d in self.dias)
+        return total / len(self.dias)
+
+    def mostrar_temperaturas(self):
+        # Imprime la temperatura de cada día
+        for d in self.dias:
+            print(d)
+
+
+# Función principal que coordina el uso de las clases
+def main():
+    print("Promedio semanal del clima (POO)")
+    semana = SemanaClimatica()  # Crea una instancia de SemanaClimatica
+
+    for dia in range(1, 8):  # Recorre los 7 días de la semana
+        temp = float(input(f"Ingrese la temperatura del día {dia}: "))
+        semana.agregar_dia(dia, temp)  # Agrega el dato diario al objeto semana
+
+    semana.mostrar_temperaturas()  # Muestra todos los datos ingresados
+    promedio = semana.calcular_promedio()  # Calcula el promedio
+    print(f"El promedio semanal de temperatura es: {promedio:.2f}°C")  # Muestra el resultado
+
+# Punto de entrada del programa
+if __name__ == "__main__":
+    main()
